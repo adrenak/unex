@@ -9,11 +9,11 @@ public class MonoBehaviourHelperExample : MonoBehaviour {
         }
 
         private void UnityFixedUpdateEvent() {
-            Debug.Log("FixedUpdate() after " + Time.fixedDeltaTime + " sec");
+            Debug.Log("FixedUpdate() after " + Time.fixedDeltaTime + " seconds");
         }
 
         private void UnityUpdateEvent() {
-            Debug.Log("Update() after" + Time.deltaTime + " sec");
+            Debug.Log("Update() after" + Time.deltaTime + " seconds");
         }
 
         public void Unsubscribe() {

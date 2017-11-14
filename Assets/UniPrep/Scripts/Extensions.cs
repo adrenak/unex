@@ -220,7 +220,7 @@ namespace UniPrep {
                 return;
             t.Abort();
             t.Join();
-        }
+        } 
 
         // GAME OBJECTS
         public static void Destroy(this GameObject gameObject) {

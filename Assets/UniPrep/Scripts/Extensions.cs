@@ -26,6 +26,7 @@ using System;
 using UnityEngine;
 using System.Text;
 using System.Reflection;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 
@@ -221,6 +222,17 @@ namespace UniPrep {
             t.Abort();
             t.Join();
         } 
+
+        // COROUTINES
+        public static Coroutine StartNew(this Coroutine c, IEnumerator method) {
+            if (c != null)
+                c.Stop();
+            return c = MonoBehaviourHelper.Instance.StartCoroutine(method);
+        }
+
+        public static void Stop(this Coroutine c) {
+            MonoBehaviourHelper.Instance.StopCoroutine(c);
+        }
 
         // GAME OBJECTS
         public static void Destroy(this GameObject gameObject) {

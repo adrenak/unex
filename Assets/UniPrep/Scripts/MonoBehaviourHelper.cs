@@ -1,28 +1,29 @@
 ﻿using UnityEngine;
+using UniPrep.Extensions;
 
-namespace UniPrep {
-    public class MonoBehaviourHelper : MonoBehaviour {
-        static MonoBehaviourHelper instance;
-        public static MonoBehaviourHelper Instance {
+namespace UniPrep.Utils {
+    public class MonoBehaviourSingleton : MonoBehaviour {
+        static MonoBehaviourSingleton instance;
+        public static MonoBehaviourSingleton Instance {
             get {
                 if (instance.IsNotNull())
                     return instance;
-                GameObject go = new GameObject("MonoBehaviourHelper");
-                instance = go.AddComponent<MonoBehaviourHelper>();
+                GameObject go = new GameObject("MonoBehaviourSingleton");
+                instance = go.AddComponent<MonoBehaviourSingleton>();
                 return instance;
             }
         }
 
         public delegate void Callback();
-        public event Callback UpdateEvent;
-        public event Callback FixedUpdateEvent;
+        public event Callback updateEvent;
+        public event Callback fixedUpdateEvent;
 
         private void Update() {
-            if (UpdateEvent != null) UpdateEvent();
+            if (updateEvent != null) updateEvent();
         }
 
         private void FixedUpdate() {
-            if (FixedUpdateEvent != null) FixedUpdateEvent();
+            if (fixedUpdateEvent != null) fixedUpdateEvent();
         }
     }
 }

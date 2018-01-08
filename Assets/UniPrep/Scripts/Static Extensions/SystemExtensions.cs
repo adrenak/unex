@@ -1,8 +1,35 @@
 ﻿using System;
+using UnityEngine;
 
 namespace UniPrep.Extensions {
     public static class SystemExceptions {
-                // STRINGS
+        // MATH
+        public static bool Approximately(this float a, float b) {
+            return Mathf.Approximately(a, b);
+        }
+
+        public static void BubbleSort(this float[] arr, bool ascending) {
+            for(int i = 0; i < arr.Length; i++) {
+                for(int j = 0; j < arr.Length - 1; j++) {
+                    if (ascending) {
+                        if(arr[j] > arr[i]) {
+                            var temp = arr[j];
+                            arr[j] = arr[i];
+                            arr[i] = temp;
+                        }
+                    }
+                    else {
+                        if (arr[j] < arr[i]) {
+                            var temp = arr[j];
+                            arr[j] = arr[i];
+                            arr[i] = temp;
+                        }
+                    }
+                }
+            }
+        }
+
+        // STRINGS
         public static bool IsNullOrEmpty(this string _string) {
             return string.IsNullOrEmpty(_string);
         }

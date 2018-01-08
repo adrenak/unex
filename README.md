@@ -10,3 +10,4 @@ UniPrep is a growing collection of tools which are the first things I add to my 
 - [Coroutines.cs by Chevy Ray Johnston](https://github.com/ChevyRay/Coroutines)  
 - [LogCatWindow.cs by Rokas Brazdžionis](https://github.com/dzonatan/Unity3D-LogCat-extension)
 - [ImmediateWindow.cs by Nick Gravelyn](http://wiki.unity3d.com/index.php?title=ImmediateWindow)
+- [uGUITools.cs by Senshi](https://forum.unity.com/members/senshi.25677/)

@@ -20,6 +20,13 @@ namespace UniPrep.Extensions {
         }
 
         // VECTOR3
+        public static bool Approximately(this Vector3 a, Vector3 b) {
+            return
+                Mathf.Approximately(a.x, b.x) &&
+                Mathf.Approximately(a.y, b.y) &&
+                Mathf.Approximately(a.z, b.z);
+        }
+        
         public static Vector3 SetX(this Vector3 v, float val) {
             return new Vector3(val, v.y, v.z);
         }
@@ -33,6 +40,12 @@ namespace UniPrep.Extensions {
         }
 
         // VECTOR2
+        public static bool Approximately(this Vector2 a, Vector2 b) {
+            return
+                Mathf.Approximately(a.x, b.x) &&
+                Mathf.Approximately(a.y, b.y);
+        }
+
         public static Vector2 SetX(this Vector2 v, float val) {
             return new Vector2(val, v.y);
         }

@@ -4,7 +4,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace UniPrep.Editor {
+namespace UniPrep.Ed {
     public static class uGUITools {
         [MenuItem("uGUI/Anchors to Corners %[")]
         static void AnchorsToCorners() {

@@ -5,7 +5,7 @@ using System.Reflection;
 using UniPrep.Extensions;
 using Object = System.Object;
 
-namespace UniPrep {
+namespace UniPrep.Ed {
     public class Hotkeys {
 
         // ================================================

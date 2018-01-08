@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 
-namespace UniPrep.Utils {
+namespace UniPrep.Ed {
     public class LogCatWindow : EditorWindow {
         // How many log entries to store in memory. Keep it low for better performance.
         private const int memoryLimit = 2000;

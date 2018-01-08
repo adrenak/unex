@@ -26,7 +26,7 @@ using Microsoft.CSharp;
 using System.CodeDom.Compiler;
 using System.Reflection;
 
-namespace UniPrep {
+namespace UniPrep.Ed {
     public class ImmediateWindow : EditorWindow {
         // script text
         private string scriptText = string.Empty;

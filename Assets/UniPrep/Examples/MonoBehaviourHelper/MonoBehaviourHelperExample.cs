@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 using UniPrep.Utils;
 
-public class MonoBehaviourSingletonExample : MonoBehaviour {
+public class MonoBehaviourHelperExample : MonoBehaviour {
     class SubscriberExample {
         public SubscriberExample() {
-            MonoBehaviourSingleton.Instance.updateEvent += UnityUpdateEvent;
-            MonoBehaviourSingleton.Instance.fixedUpdateEvent += UnityFixedUpdateEvent;
+            MonoBehaviourHelper.Instance.updateEvent += UnityUpdateEvent;
+            MonoBehaviourHelper.Instance.fixedUpdateEvent += UnityFixedUpdateEvent;
         }
 
         private void UnityFixedUpdateEvent() {
@@ -17,9 +17,8 @@ public class MonoBehaviourSingletonExample : MonoBehaviour {
         }
 
         public void Unsubscribe() {
-            MonoBehaviourSingleton.Instance.updateEvent -= UnityUpdateEvent;
-            MonoBehaviourSingleton.Instance.fixedUpdateEvent -= UnityFixedUpdateEvent;
-
+            MonoBehaviourHelper.Instance.updateEvent -= UnityUpdateEvent;
+            MonoBehaviourHelper.Instance.fixedUpdateEvent -= UnityFixedUpdateEvent;
         }
     }
 

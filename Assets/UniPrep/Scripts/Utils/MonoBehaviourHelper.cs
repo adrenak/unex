@@ -2,14 +2,14 @@
 using UniPrep.Extensions;
 
 namespace UniPrep.Utils {
-    public class MonoBehaviourSingleton : MonoBehaviour {
-        static MonoBehaviourSingleton instance;
-        public static MonoBehaviourSingleton Instance {
+    public class MonoBehaviourHelper : MonoBehaviour {
+        static MonoBehaviourHelper instance;
+        public static MonoBehaviourHelper Instance {
             get {
                 if (instance.IsNotNull())
                     return instance;
                 GameObject go = new GameObject("MonoBehaviourSingleton");
-                instance = go.AddComponent<MonoBehaviourSingleton>();
+                instance = go.AddComponent<MonoBehaviourHelper>();
                 return instance;
             }
         }

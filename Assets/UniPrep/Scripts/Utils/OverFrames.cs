@@ -10,7 +10,7 @@ namespace UniPrep.Utils {
 
         public delegate void ForLoopDelegate(int index);
 
-        public static OverFrames Get() {
+        static OverFrames Get() {
             if (pool.Count == 0) {
                 pool.Add(CreateInstance());
                 return pool[0];
@@ -38,11 +38,12 @@ namespace UniPrep.Utils {
             return cted;
         }
 
-        public void For(int start, int end, int cycles, ForLoopDelegate loopBody, Action onEnd) {
-            if (end - start < cycles)
-                Debug.LogError("end - start should be greater than cycles");
-            isFree = false;
-            StartCoroutine(ForCo(start, end, cycles, loopBody, onEnd));
+        public static void For(int start, int end, int frames, ForLoopDelegate loopBody, Action onEnd) {
+            var instance = Get();
+            if (end - start < frames)
+                Debug.LogError("end - start should be greater than frame count");
+            instance.isFree = false;
+            instance.StartCoroutine(instance.ForCo(start, end, frames, loopBody, onEnd));
         }
 
         IEnumerator ForCo(int start, int end, int cycles, ForLoopDelegate loopBody, Action onEnd) {

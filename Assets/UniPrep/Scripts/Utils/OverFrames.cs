@@ -1,48 +1,25 @@
 ﻿using System;
 using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
 
 namespace UniPrep.Utils {
     public class OverFrames : MonoBehaviour {
-        bool isFree;
-        static List<OverFrames> pool = new List<OverFrames>();
-
+        static OverFrames instance;
         public delegate void ForLoopDelegate(int index);
 
-        static OverFrames Get() {
-            if (pool.Count == 0) {
-                pool.Add(CreateInstance());
-                return pool[0];
+        static OverFrames GetInstance() {
+            if(instance == null) {
+                var go = new GameObject("OverFramesManager");
+                DontDestroyOnLoad(go);
+                instance = go.AddComponent<OverFrames>();
             }
-
-            var freeIndex = GetFirstFreeIndex();
-
-            if (freeIndex == -1) {
-                pool.Add(CreateInstance());
-                return pool[0];
-            }
-            else
-                return pool[GetFirstFreeIndex()];
-        }
-
-        static int GetFirstFreeIndex() {
-            for (int i = 0; i < pool.Count; i++)
-                if (pool[i].isFree)
-                    return i;
-            return -1;
-        }
-
-        static OverFrames CreateInstance() {
-            var cted = new GameObject("OverFrames").AddComponent<OverFrames>();
-            return cted;
+            return instance;
         }
 
         public static void For(int start, int end, int frames, ForLoopDelegate loopBody, Action onEnd) {
-            var instance = Get();
+            var instance = GetInstance();
             if (end - start < frames)
                 Debug.LogError("end - start should be greater than frame count");
-            instance.isFree = false;
             instance.StartCoroutine(instance.ForCo(start, end, frames, loopBody, onEnd));
         }
 
@@ -57,7 +34,7 @@ namespace UniPrep.Utils {
                 i++;
             }
             onEnd();
-            isFree = true;
+            yield break;
         }
     }
 }

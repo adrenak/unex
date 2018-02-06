@@ -44,7 +44,7 @@ namespace UniPrep.Utils {
         /// <param name="onDone">The action invoked with the delay is over. </param>
         public static void StartDelayed(float delay, Action onDone) {
             Work delayWork = new Work(DelayCo(delay));
-            delayWork.Start(() => {
+            delayWork.Begin(() => {
                 onDone();
             });
         }
@@ -68,8 +68,8 @@ namespace UniPrep.Utils {
         /// Starts the Work
         /// </summary>
         /// <param name="onCompleted">Callback when the work is done</param>
-        public void Start(Action onCompleted = null) {
-            m_Executor.Start(() => {
+        public void Begin(Action onCompleted = null) {
+            m_Executor.Begin(() => {
                 if(onCompleted != null)
                     onCompleted();
             });
@@ -92,8 +92,8 @@ namespace UniPrep.Utils {
         /// <summary>
         /// Stops the work and cleans up the instance
         /// </summary>
-        public void Stop() {
-            m_Executor.Stop();
+        public void End() {
+            m_Executor.End();
         }
     }
 
@@ -127,7 +127,7 @@ namespace UniPrep.Utils {
         /// Starts the wrapped coroutine in the public coroutine
         /// </summary>
         /// <param name="callback">Callback invoked on completion.</param>
-        public void Start(Action onDone) {
+        public void Begin(Action onDone) {
             m_OnDone = onDone;
             m_Running = true;
             StartCoroutine(ExecutorMethod());
@@ -141,7 +141,7 @@ namespace UniPrep.Utils {
             m_Paused = false;
         }
 
-        public void Stop() {
+        public void End() {
             m_Running = false;
         }
 

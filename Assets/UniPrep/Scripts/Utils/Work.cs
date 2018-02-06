@@ -11,15 +11,17 @@ namespace UniPrep.Utils {
         const string k_ExecutorNamePrefix = "WORK_";
         static int m_WorkCount;
         WorkExecutor m_Executor;
-        bool m_Running;
-        bool m_Paused;
         int m_ID;
 
         /// <summary>
         /// Returns if the coroutine is currently running
         /// </summary>
         public bool Running {
-            get { return m_Running; }
+            get { return m_Executor.IsRunning(); }
+        }
+
+        public bool Paused {
+            get { return m_Executor.IsPaused(); }
         }
 
         // ================================================
@@ -143,6 +145,14 @@ namespace UniPrep.Utils {
 
         public void End() {
             m_Running = false;
+        }
+
+        public bool IsRunning() {
+            return m_Running;
+        }
+
+        public bool IsPaused() {
+            return m_Paused;
         }
 
         IEnumerator ExecutorMethod() {

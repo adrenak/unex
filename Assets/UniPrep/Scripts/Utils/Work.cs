@@ -55,11 +55,12 @@ namespace UniPrep.Utils {
             yield return new WaitForSeconds(delayDuration);
             yield break;
         }
-        
+
         public new string ToString() {
             return new StringBuilder()
                 .Append("Job ID : ").Append(m_ID.ToString())
-                .Append("Running : ").Append(m_Running.ToString())
+                .Append("Running : ").Append(Running.ToString())
+                .Append("Paused : ").Append(Paused.ToString())
                 .ToString();
         }
 

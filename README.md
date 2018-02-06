@@ -6,7 +6,7 @@ UniPrep is a growing collection of tools which are the first things I add to my 
 - C# language and Unity API classes extension methods  
 - Unity Editor Hotkeys
 - OverFrames.cs by Vatsal Ambastha (me)  
-- Jobs.cs by Vatsal Ambastha (me) | Modified from [here](https://github.com/krockot/Unity-TaskManager)  
+- Work.cs by Vatsal Ambastha (me)  
 - [Parallel.cs by Stewart Adcock](https://github.com/stewartadcock/Uk.Org.Adcock.Parallel/blob/master/Parallel/Properties/AssemblyInfo.cs)  
 - [ThreadPool.cs by Nyahoon Games](https://nyahoon.com/blog-en/366)  
 - [LogCatWindow.cs by Rokas Brazdžionis](https://github.com/dzonatan/Unity3D-LogCat-extension)

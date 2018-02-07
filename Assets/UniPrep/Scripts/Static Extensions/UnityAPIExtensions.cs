@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 
 namespace UniPrep.Extensions {
     public static class UnityAPIExtensions {
@@ -67,6 +68,28 @@ namespace UniPrep.Extensions {
         public static void Set(this CanvasGroup group, bool status) {
             group.interactable = group.blocksRaycasts = status;
             group.alpha = status ? 1 : 0;
+        }
+
+        // LAYER MASK
+        public static bool Contains(this LayerMask mask, int layer) {
+            return mask == (mask | (1 << layer));
+        }
+
+        public static int[] GetIncludedLayers(this LayerMask mask) {
+            List<int> layers = new List<int>();
+            for (int i = 0; i < 32; i++) {
+                var contains = mask.Contains(i);
+                if(contains)
+                    layers.Add(i);
+            }
+            return layers.ToArray();
+        }
+
+        public static bool[] GetLayersAsBool(this LayerMask mask) {
+            bool[] boolArray = new bool[32];
+            for (int i = 0; i < 32; i++)
+                boolArray[i] = mask.Contains(i);
+            return boolArray;
         }
     }
 }

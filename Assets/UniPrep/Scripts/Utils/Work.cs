@@ -4,7 +4,7 @@ using System.Text;
 using System.Collections;
 
 namespace UniPrep.Utils {
-    public class Work {
+    public class Work<T> {
         // ================================================
         // FIELDS
         // ================================================
@@ -50,15 +50,15 @@ namespace UniPrep.Utils {
                 onDone();
             });
         }
-
+        
         private static IEnumerator DelayCo(float delayDuration) {
             yield return new WaitForSeconds(delayDuration);
-            yield break;
+            yield return null;
         }
 
         public new string ToString() {
             return new StringBuilder()
-                .Append("Job ID : ").Append(m_ID.ToString())
+                .Append("Work ID : ").Append(m_ID.ToString())
                 .Append("Running : ").Append(Running.ToString())
                 .Append("Paused : ").Append(Paused.ToString())
                 .ToString();
@@ -71,11 +71,22 @@ namespace UniPrep.Utils {
         /// Starts the Work
         /// </summary>
         /// <param name="onCompleted">Callback when the work is done</param>
-        public void Begin(Action onCompleted = null) {
-            m_Executor.Begin(() => {
+        public void Begin(Action<T> onCompleted) {
+            m_Executor.Begin((result) => {
                 if(onCompleted != null)
+                    onCompleted((T)result);
+            });
+        }
+
+        public void Begin(Action onCompleted) {
+            m_Executor.Begin((result) => {
+                if (onCompleted != null)
                     onCompleted();
             });
+        }
+
+        public void Begin() {
+            m_Executor.Begin((result) => { });
         }
 
         /// <summary>
@@ -100,6 +111,10 @@ namespace UniPrep.Utils {
         }
     }
 
+    public class Work : Work<object> {
+        public Work(IEnumerator method) : base(method) { }
+    }
+
     public class WorkExecutor : MonoBehaviour {
         // ================================================
         // FIELDS
@@ -107,7 +122,8 @@ namespace UniPrep.Utils {
         IEnumerator m_WorkCoroutine;
         bool m_Running;
         bool m_Paused;
-        Action m_OnDone;
+        Action<object> m_OnDone;
+        object m_Result;
 
         void Awake() {
             DontDestroyOnLoad(gameObject);
@@ -115,7 +131,7 @@ namespace UniPrep.Utils {
         }
 
         void OnDestroy() {
-            Terminate();
+            m_Running = false;
         }
 
         /// <summary>
@@ -130,7 +146,7 @@ namespace UniPrep.Utils {
         /// Starts the wrapped coroutine in the public coroutine
         /// </summary>
         /// <param name="callback">Callback invoked on completion.</param>
-        public void Begin(Action onDone) {
+        public void Begin(Action<object> onDone) {
             m_OnDone = onDone;
             m_Running = true;
             StartCoroutine(ExecutorMethod());
@@ -163,8 +179,10 @@ namespace UniPrep.Utils {
 
                 if (m_WorkCoroutine != null && m_WorkCoroutine.MoveNext())
                     yield return m_WorkCoroutine.Current;
-                else
+                else {
+                    m_Result = m_WorkCoroutine.Current;
                     m_Running = false;
+                }
             }
             Terminate();
             yield break;
@@ -176,7 +194,7 @@ namespace UniPrep.Utils {
         public void Terminate() {
             StopCoroutine(ExecutorMethod());
             m_WorkCoroutine = null;
-            m_OnDone();
+            m_OnDone(m_Result);
             Destroy(gameObject);
         }
     }

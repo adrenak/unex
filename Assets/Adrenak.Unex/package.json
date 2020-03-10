@@ -1,0 +1,13 @@
+{
+    "name": "com.adrenak.unex",
+    "version": "1.0.0",
+    "displayName": "Unex",
+    "description": "Unity3D, extended. Includes hotkeys, C# extensions, utilities and more.",
+    "unity": "2018.4",
+    "author": {
+        "name": "Vatsal Ambastha",
+        "email": "adrenak_@outlook.com",
+        "url": "http://www.vatsalambastha.com"
+    },
+    "dependencies": {}
+}

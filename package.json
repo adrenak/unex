@@ -1,6 +1,6 @@
 {
     "name": "com.adrenak.unex",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "displayName": "Unex",
     "description": "Unity3D, extended. Includes hotkeys, C# extensions, utilities and more.",
     "unity": "2018.4",

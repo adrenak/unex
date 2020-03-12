@@ -1,0 +1,14 @@
+{
+    "name": "com.adrenak.unex.samples",
+    "references": [
+        "com.adrenak.unex"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": []
+}

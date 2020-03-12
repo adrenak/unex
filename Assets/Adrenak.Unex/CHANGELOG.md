@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/adrenak/Unex/compare/v1.2.0...v1.3.0) (2020-03-12)
+
+
+### Features
+
+* Add utils for Task and Screen classes ([b43f593](https://github.com/adrenak/Unex/commit/b43f593079f2fb60e22aa0ca632e87d44a91b2af))
+
 # [1.2.0](https://github.com/adrenak/Unex/compare/v1.1.0...v1.2.0) (2020-03-12)
 
 

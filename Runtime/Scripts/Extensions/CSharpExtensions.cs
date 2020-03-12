@@ -129,5 +129,20 @@ namespace Adrenak.Unex {
 		public static bool IsNullOrEmpty<T>(this T[] array) {
 			return array == null || array.Length == 0;
 		}
-	}
+
+        public static T FromLast<T>(this List<T> list, int index) {
+            if (index >= list.Count)
+                throw new IndexOutOfRangeException(index + " is out of range");
+            return list[list.Count - 1 - index];
+        }
+
+        public static T Last<T>(this List<T> list) {
+            return list.FromLast(0);
+        }
+
+        public static void RemoveLast<T>(this List<T> list) {
+            var last = list.Last();
+            list.Remove(last);
+        }
+    }
 }

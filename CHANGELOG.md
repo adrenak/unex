@@ -1,3 +1,15 @@
+# [2.0.0](https://github.com/adrenak/Unex/compare/v1.3.0...v2.0.0) (2020-03-12)
+
+
+### Features
+
+* Improved Runner.cs ([9a65e02](https://github.com/adrenak/Unex/commit/9a65e02a42fba8d88c2c51cafee174af4665129e))
+
+
+### BREAKING CHANGES
+
+* Runner class has breaking changes
+
 # [1.3.0](https://github.com/adrenak/Unex/compare/v1.2.0...v1.3.0) (2020-03-12)
 
 

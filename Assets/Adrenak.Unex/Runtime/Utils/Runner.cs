@@ -22,7 +22,7 @@ namespace Adrenak.Unex {
         /// Event fired with the state of the instance changes
         /// </summary>
         public event Action<State> OnStateChange;
-        Action m_OnDone;
+        Action m_OnFinished;
         IEnumerator m_Method;
         Coroutine m_Coroutine;
 
@@ -31,8 +31,7 @@ namespace Adrenak.Unex {
             get { return m_State; }
             private set {
                 m_State = value;
-                if (OnStateChange != null)
-                    OnStateChange(m_State);
+                OnStateChange?.Invoke(m_State);
             }
         }
 
@@ -56,30 +55,13 @@ namespace Adrenak.Unex {
         // ================================================
         //  INSTANCE METHODS API
         // ================================================
-        public static Runner New(IEnumerator method) {
-            return New(method, null);
-        }
-
-        public static Runner New() {
-            return New(null, null);
-        }
-
         /// <summary>
-        /// Constructs a new Runner instance that executes on the given GameObject
+        /// Constructs a new Runner instance
         /// </summary>
         /// <param name="method">The IEnumerator method that the instance should run</param>
         /// <returns>The created instance</returns>
-        public static Runner New(IEnumerator method, GameObject host) {
-            GameObject go;
-            if (host == null)
-                go = new GameObject();
-            else
-                go = host;
-
-            //go.hideFlags = HideFlags.HideAndDontSave;
-            DontDestroyOnLoad(go);
-
-            var runner = go.AddComponent<Runner>();
+        public static Runner New(IEnumerator method) {
+            var runner = m_StaticHost.AddComponent<Runner>();
             runner.m_Method = method;
             return runner;
         }
@@ -88,7 +70,7 @@ namespace Adrenak.Unex {
         /// Begins execution of the coroutine and invokes a callback when it gets over
         /// </summary>
         public void Run(Action onFinished) {
-            m_OnDone = onFinished;
+            m_OnFinished = onFinished;
             RunnerState = State.Running;
             m_Coroutine = StartCoroutine(AsyncExecutor());
         }
@@ -97,7 +79,7 @@ namespace Adrenak.Unex {
         /// Debings the execution of a coroutine
         /// </summary>
         public void Run() {
-            Run(null);
+            Run((Action)null);
         }
 
         IEnumerator AsyncExecutor() {
@@ -109,7 +91,7 @@ namespace Adrenak.Unex {
                     yield return m_Method.Current;
                 else {
                     RunnerState = State.Finished;
-                    if (m_OnDone != null) m_OnDone();
+                    if (m_OnFinished != null) m_OnFinished();
                 }
             }
             yield break;
@@ -146,8 +128,8 @@ namespace Adrenak.Unex {
         /// </summary>
         /// <param name="method">The IEnumerator method that has to be executed</param>
         /// <returns>The Runner instance</returns>
-        public static Runner AutoRun(IEnumerator method) {
-            return AutoRun(method, null);
+        public static Runner Run(IEnumerator method) {
+            return Run(method, null);
         }
 
         /// <summary>
@@ -155,11 +137,10 @@ namespace Adrenak.Unex {
         /// </summary>
         /// <param name="method">The IEnumerator method that has to be executed</param>
         /// <returns>The Runner instance</returns>
-        public static Runner AutoRun(IEnumerator method, Action onFinished) {
-            Runner runner = Runner.New(method, m_StaticHost);
+        public static Runner Run(IEnumerator method, Action onFinished) {
+            Runner runner = New(method);
             runner.Run(() => {
-                if (onFinished != null)
-                    onFinished();
+                onFinished?.Invoke();
                 runner.Destroy();
             });
             return runner;
@@ -170,8 +151,8 @@ namespace Adrenak.Unex {
         /// </summary>
         /// <param name="seconds">The delay in seconds</param>
         /// <param name="action">The action to be invoked</param>
-        public void WaitForSeconds(float seconds, Action action) {
-            Runner runner = AutoRun(WaitForSecondsAsync(seconds));
+        public static void WaitForSeconds(float seconds, Action action) {
+            Runner runner = Run(WaitForSecondsAsync(seconds));
             runner.OnStateChange += state => {
                 if (state == State.Finished) {
                     action();
@@ -180,12 +161,12 @@ namespace Adrenak.Unex {
             };
         }
 
-        IEnumerator WaitForSecondsAsync(float seconds) {
+        static IEnumerator WaitForSecondsAsync(float seconds) {
             yield return new WaitForSeconds(seconds);
         }
 
-        public void WaitForEndOfFrame(Action action) {
-            Runner runner = AutoRun(WaitForEndOfFrameAsync());
+        public static void WaitForEndOfFrame(Action action) {
+            Runner runner = Run(WaitForEndOfFrameAsync());
             runner.OnStateChange += state => {
                 if (state == State.Finished) {
                     action();
@@ -194,7 +175,7 @@ namespace Adrenak.Unex {
             };
         }
 
-        IEnumerator WaitForEndOfFrameAsync() {
+        static IEnumerator WaitForEndOfFrameAsync() {
             yield return new WaitForEndOfFrame();
         }
 
@@ -203,8 +184,8 @@ namespace Adrenak.Unex {
         /// </summary>
         /// <param name="predicate">The condition to check</param>
         /// <param name="callback">Callback when the condition becomes false</param>
-        public Runner WaitWhile(Func<bool> predicate, Action callback) {
-            Runner runner = AutoRun(WaitWhileAsync(predicate, callback));
+        public static Runner WaitWhile(Func<bool> predicate, Action callback) {
+            Runner runner = Run(WaitWhileAsync(predicate, callback));
             runner.OnStateChange += state => {
                 if (state == State.Finished) {
                     if (callback != null) callback();
@@ -214,7 +195,7 @@ namespace Adrenak.Unex {
             return runner;
         }
 
-        IEnumerator WaitWhileAsync(Func<bool> predicate, Action callback) {
+        static IEnumerator WaitWhileAsync(Func<bool> predicate, Action callback) {
             while (predicate()) yield return null;
         }
 
@@ -223,31 +204,36 @@ namespace Adrenak.Unex {
         /// </summary>
         /// <param name="predicate">The condition to check</param>
         /// <param name="callback">Callback when the condition becomes true</param>
-        public Runner WaitUntil(Func<bool> predicate, Action callback) {
-            Runner runner = AutoRun(WaitUntilAsync(predicate, callback));
+        public static Runner WaitUntil(Func<bool> predicate, Action callback) {
+            Runner runner = Run(WaitUntilAsync(predicate, callback));
             runner.OnStateChange += state => {
                 if (state == State.Finished) {
-                    if (callback != null) callback();
                     runner.Destroy();
+                    callback?.Invoke();
                 }
             };
             return runner;
         }
 
-        IEnumerator WaitUntilAsync(Func<bool> predicate, Action callback) {
+        static IEnumerator WaitUntilAsync(Func<bool> predicate, Action callback) {
             while (!predicate()) yield return null;
         }
 
-        public Runner RunIf(Func<bool> predicate, Action callback) {
-            return AutoRun(RunIfAsync(predicate, callback));
+        public static Runner RunWhen(Func<bool> predicate, Action callback) {
+            Runner runner = Run(RunWhenAsync(predicate, callback));
+            runner.OnStateChange += state => {
+                if (state == State.Finished) {
+                    runner.Destroy();
+                    callback?.Invoke();
+                }
+            };
+            return runner;
         }
 
-        IEnumerator RunIfAsync(Func<bool> predicate, Action callback) {
+        static IEnumerator RunWhenAsync(Func<bool> predicate, Action callback) {
             while (true) {
-                if (predicate()) {
+                if (predicate()) 
                     callback();
-                    Destroy();
-                }
                 yield return null;
             }
         }

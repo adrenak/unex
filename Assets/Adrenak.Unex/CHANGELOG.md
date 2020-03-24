@@ -1,3 +1,10 @@
+## [2.0.1](https://github.com/adrenak/Unex/compare/v2.0.0...v2.0.1) (2020-03-24)
+
+
+### Bug Fixes
+
+* Move editor scripts under a new asmdef ([76ea2c9](https://github.com/adrenak/Unex/commit/76ea2c99b4f338ab82d28620d805778e10af72aa))
+
 # [2.0.0](https://github.com/adrenak/Unex/compare/v1.3.0...v2.0.0) (2020-03-12)
 
 

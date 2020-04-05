@@ -1,6 +1,8 @@
 {
-    "name": "com.adrenak.unex.editor",
-    "references": [],
+    "name": "Adrenak.Unex.Editor",
+    "references": [
+        "Adrenak.Unex.Runtime"
+    ],
     "optionalUnityReferences": [],
     "includePlatforms": [
         "Editor"

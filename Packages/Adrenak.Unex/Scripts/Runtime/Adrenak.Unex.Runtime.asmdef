@@ -1,8 +1,6 @@
 {
-    "name": "com.adrenak.unex.samples",
-    "references": [
-        "com.adrenak.unex"
-    ],
+    "name": "Adrenak.Unex.Runtime",
+    "references": [],
     "optionalUnityReferences": [],
     "includePlatforms": [],
     "excludePlatforms": [],

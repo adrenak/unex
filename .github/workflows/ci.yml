@@ -40,7 +40,7 @@ jobs:
         fi
         git push -f -u origin upm
       env:
-        PKG_ROOT: "Assets/Adrenak.Unex"
+        PKG_ROOT: "Packages/Adrenak.Unex"
 
 
     - name: Create upm git tag

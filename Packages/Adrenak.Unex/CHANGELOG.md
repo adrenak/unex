@@ -1,3 +1,10 @@
+## [2.0.2](https://github.com/adrenak/Unex/compare/v2.0.1...v2.0.2) (2020-04-05)
+
+
+### Bug Fixes
+
+* Project reorg ([83893b2](https://github.com/adrenak/Unex/commit/83893b2bc7e6ef92dad2c47375166a2fae971462))
+
 ## [2.0.1](https://github.com/adrenak/Unex/compare/v2.0.0...v2.0.1) (2020-03-24)
 
 

@@ -1,3 +1,10 @@
+# [2.1.0](https://github.com/adrenak/Unex/compare/v2.0.2...v2.1.0) (2020-04-07)
+
+
+### Features
+
+* Add UI Layout rebuild extension method ([963451d](https://github.com/adrenak/Unex/commit/963451d137cf9f955759d47800d6d28925c8a373))
+
 ## [2.0.2](https://github.com/adrenak/Unex/compare/v2.0.1...v2.0.2) (2020-04-05)
 
 

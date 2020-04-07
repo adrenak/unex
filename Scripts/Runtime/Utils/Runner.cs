@@ -3,6 +3,7 @@ using System;
 using UnityEngine;
 
 namespace Adrenak.Unex {
+    [Obsolete("Avoid using Runner and instead use Runnable.")]
     public class Runner : MonoBehaviour {
         /// <summary>
         /// Represents the different states in which the instance can be in

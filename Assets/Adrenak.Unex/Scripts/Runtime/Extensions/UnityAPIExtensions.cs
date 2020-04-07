@@ -1,5 +1,9 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
+
 using System.Collections.Generic;
+using System.Threading.Tasks;
+
 using System.Reflection;
 using System;
 using Object = UnityEngine.Object;
@@ -13,8 +17,15 @@ namespace Adrenak.Unex {
 				Mathf.Approximately(a.y, b.y);
 		}
 
-		// GAME OBJECTS
-		public static void Destroy(this GameObject gameObject) {
+        public static bool Approximately(this Vector3 a, Vector3 b) {
+            return
+                Mathf.Approximately(a.x, b.x) &&
+                Mathf.Approximately(a.y, b.y) &&
+                Mathf.Approximately(a.z, b.z);
+        }
+
+        // GAME OBJECTS
+        public static void Destroy(this GameObject gameObject) {
 			MonoBehaviour.Destroy(gameObject);
 		}
 
@@ -220,5 +231,17 @@ namespace Adrenak.Unex {
 			if (tex == null) return null;
 			return Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(.5F, .5F));
 		}
-	}
+
+        public static Task MarkForUIRebuild<T>(this T t) where T : Component {
+            return t.gameObject.MarkForUIRebuild();
+        }
+
+        async public static Task MarkForUIRebuild(this GameObject go) {
+            if (go.GetComponent<RectTransform>()) {
+                await TaskX.WaitTillNextFrame();
+                LayoutRebuilder.MarkLayoutForRebuild(go.GetComponent<RectTransform>());
+                await TaskX.WaitTillNextFrame();
+            }
+        }
+    }
 }

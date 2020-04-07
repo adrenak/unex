@@ -4,7 +4,7 @@ using System.Text;
 using UnityEngine;
 
 namespace Adrenak.Unex {
-	public static class LanguageExtensions {
+	public static class CSharpExtensions {
 		// ENUM
 		public static bool Has<T>(this Enum type, T value) {
 			try {
@@ -56,13 +56,15 @@ namespace Adrenak.Unex {
 			return Mathf.Approximately(a, b);
 		}
 
+        // BYTE[]
+		public static string ToUTF8String(this byte[] bytes) {
+			return Encoding.UTF8.GetString(bytes);
+		}
+
+
 		// STRINGS
 		public static bool IsNullOrEmpty(this string _string) {
 			return string.IsNullOrEmpty(_string);
-		}
-
-		public static string ToUTF8String(this byte[] bytes) {
-			return Encoding.UTF8.GetString(bytes);
 		}
 
 		public static byte[] ToUTF8Bytes(this string str) {

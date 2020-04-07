@@ -5,14 +5,14 @@
     "@semantic-release/release-notes-generator",
     ["@semantic-release/changelog", { 
       "preset": "angular",
-      "changelogFile":"Packages/Adrenak.Unex/CHANGELOG.md"
+      "changelogFile":"Assets/Adrenak.Unex/CHANGELOG.md"
     }],
     ["@semantic-release/npm", { 
       "npmPublish": false,
-      "pkgRoot":"Packages/Adrenak.Unex/"
+      "pkgRoot":"Assets/Adrenak.Unex/"
     }],
     ["@semantic-release/git", {
-      "assets": ["Packages/Adrenak.Unex/package.json", "Packages/Adrenak.Unex/CHANGELOG.md"],
+      "assets": ["Assets/Adrenak.Unex/package.json", "Assets/Adrenak.Unex/CHANGELOG.md"],
       "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
     }],
     "@semantic-release/github"

@@ -3,6 +3,7 @@
 		public static void Initialize() {
 			Dispatcher.Init();
 			Runner.Init();
+            Runnable.Init();
 		}
 	}
 }

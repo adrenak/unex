@@ -1,3 +1,10 @@
+# [2.2.0](https://github.com/adrenak/Unex/compare/v2.1.0...v2.2.0) (2020-04-07)
+
+
+### Features
+
+* Add Runnable and ImageAspectRatioFitter ([dd671e7](https://github.com/adrenak/Unex/commit/dd671e79cdc488591ec48b6781d062b7d49ed206))
+
 # [2.1.0](https://github.com/adrenak/Unex/compare/v2.0.2...v2.1.0) (2020-04-07)
 
 

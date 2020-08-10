@@ -1,3 +1,10 @@
+# [2.3.0](https://github.com/adrenak/unex/compare/v2.2.0...v2.3.0) (2020-08-10)
+
+
+### Features
+
+* Add TaskGroup ([c4c4ec4](https://github.com/adrenak/unex/commit/c4c4ec4c5e7470690b059092aef93979bcfd3215))
+
 # [2.2.0](https://github.com/adrenak/Unex/compare/v2.1.0...v2.2.0) (2020-04-07)
 
 

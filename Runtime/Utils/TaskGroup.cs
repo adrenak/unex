@@ -19,11 +19,11 @@ namespace Adrenak.Unex {
             while (taskMap.Count != 0) {
                 var done = await Task.WhenAny(taskMap.Values.ToList());
                 var index = taskMap.Values.ToList().IndexOf(done);
-                var genre = taskMap.Keys.ToList()[index];
+                var key = taskMap.Keys.ToList()[index];
 
-                resultMap.Add(genre, done.Result);
+                resultMap.Add(key, done.Result);
                 SingleTaskCompleted?.Invoke(done.Result, index);
-                taskMap.Remove(genre);
+                taskMap.Remove(key);
             }
 
             return resultMap;

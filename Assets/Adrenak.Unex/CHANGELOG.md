@@ -1,3 +1,10 @@
+# [2.4.0](https://github.com/adrenak/unex/compare/v2.3.0...v2.4.0) (2020-11-21)
+
+
+### Features
+
+* Remove Runner and make some minor changes to code ([7d9d71b](https://github.com/adrenak/unex/commit/7d9d71bcc6b74112f8eb386d74303fa9ef54e16e))
+
 # [2.3.0](https://github.com/adrenak/unex/compare/v2.2.0...v2.3.0) (2020-08-10)
 
 

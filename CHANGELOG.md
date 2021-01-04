@@ -1,3 +1,10 @@
+# [2.5.0](https://github.com/adrenak/unex/compare/v2.4.0...v2.5.0) (2021-01-04)
+
+
+### Features
+
+* Upgrade to Unity 2018.4.30f1 ([73bd2f3](https://github.com/adrenak/unex/commit/73bd2f33c98d0df3b96b046f8e40cf7769844878))
+
 # [2.4.0](https://github.com/adrenak/unex/compare/v2.3.0...v2.4.0) (2020-11-21)
 
 

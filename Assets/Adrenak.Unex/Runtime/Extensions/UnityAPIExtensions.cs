@@ -205,7 +205,7 @@ namespace Adrenak.Unex {
 				}
 			}
 
-			MonoBehaviour.Destroy(tex);
+			Object.Destroy(tex);
 			tex = new Texture2D((int)rect.width, (int)rect.height, tex.format, true);
 			tex.SetPixels32(colors, 0);
 			tex.Apply();

@@ -98,6 +98,7 @@ namespace Adrenak.Unex {
 			return tex;
 		}
 
+#if !UNEX_DISABLE_WEBCAM
 		public static Texture2D GetFrame(this WebCamTexture tex) {
 			if (!tex.isPlaying) return null;
 			var result = new Texture2D(tex.width, tex.height);
@@ -105,6 +106,7 @@ namespace Adrenak.Unex {
 			result.Apply();
 			return result;
 		}
+#endif
 
 		public static Object LoadObject(this AssetBundle bundle, string name, bool unload) {
 			var temp = bundle.LoadObjects(new string[] { name }, unload);
